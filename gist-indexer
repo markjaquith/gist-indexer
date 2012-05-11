@@ -23,7 +23,7 @@ do {
 	$content = file_get_contents( 'https://gist.github.com/mine?page=' . $page, false, $context );
 	if ( strpos( $content, '<div class="userbox">' ) === false )
 		die( 'Bad session value' . "\n" );
-	preg_match_all( '#<span><a href="/([0-9a-f]{20})">gist: \1</a></span>#', $content, $matches, PREG_PATTERN_ORDER );
+	preg_match_all( '#<span><a href="/([0-9a-f]{20}|[0-9]+)">gist: \1</a></span>#', $content, $matches, PREG_PATTERN_ORDER );
 	$gists = array_merge( $gists, $matches[1] );
 	$page++;
 	$has_next_page = strpos( $content, '<a href="/mine?page=' . $page . '">Older &raquo;</a>' ) !== false;
